@@ -1,9 +1,17 @@
-import React from 'react';
+import React, {useState} from 'react';
+import {createContext} from "react";
 
-function BrowserRouter(props) {
+const BrowserContext=createContext();
+const routerState={};
+
+function BrowserRouter({children}) {
+    const [currentURL,setCurrentURL]=useState(new URL(window.location.href));
     return (
-        <div></div>
+        <BrowserContext.Provider value={{routerState,currentURL,setCurrentURL}}>
+            {children}
+        </BrowserContext.Provider>
     );
 }
 
 export default BrowserRouter;
+export {BrowserContext};
